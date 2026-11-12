@@ -271,7 +271,7 @@
         
         <img id="qrImage" class="qr-img" src="" alt="QR Code" width="180" height="180">
         
-        <input type="text" id="urlInput" class="url-input" placeholder="Pega tu enlace web aquí..." oninput="updateQR(this.value)"style="display: none;">
+        <input type="text" id="urlInput" class="url-input" placeholder="Pega tu enlace web aquí..." oninput="updateQR(this.value)" style="display: none;">
         
         <button class="btn-action" onclick="closeQR()" style="margin-top:15px;">Cerrar</button>
     </div>
@@ -280,33 +280,72 @@
 <script>
 const bank = {
     easy: [
+        // 1ª Opción CORRECTA en Inicial
         [
-            { q: "LIST 1: How many cookies do 2 Apples (Red) cost in total?", h: "Pista: 1 cookie each", a: ["2 cookies", "3 cookies", "1 cookie"], c: "2 cookies" },
-            { q: "LIST 1: How many cookies does 1 Lettuce (Green) cost?", h: "Pista: Check List 1 items", a: ["2 cookies", "1 cookie", "3 cookies"], c: "2 cookies" },
-            { q: "LIST 1: TRICKY ITEM: 1 Tomato (Red) - Is a tomato a fruit or a vegetable?", h: "Pista: It costs 2 cookies and has seeds inside.", a: ["Fruit", "Vegetable", "Neither"], c: "Fruit" },
-            { q: "LIST 1: What is the TOTAL COST for List 1?", h: "Pista: Budget is 10 Cookies maximum", a: ["9 Cookies", "10 Cookies", "8 Cookies"], c: "9 Cookies" }
+            { q: "How many cookies do 2 Apples (Red) cost in total?", h: "Hint: Check Flashcard", a: ["2 cookies", "3 cookies", "1 cookie"], c: "2 cookies" },
+            { q: "How many cookies does 1 Lettuce (Green) cost?", h: "Hint: Check Flashcard", a: ["2 cookies", "1 cookie", "3 cookies"], c: "2 cookies" },
+            { q: "TRICKY ITEM: 1 Tomato (Red) - Is a tomato a fruit or a vegetable?", h: "Hint: It has seeds inside.", a: ["Fruit", "Vegetable", "Neither"], c: "Fruit" },
+            { q: "What is the TOTAL COST ?", h: "Hint: Budget is 10 Cookies maximum", a: ["9 Cookies", "10 Cookies", "8 Cookies"], c: "9 Cookies" }
         ],
         [
-            { q: "LIST 2: How many cookies does 1 Coconut (Brown / White) cost?", h: "Pista: Initial Level List 2", a: ["3 cookies", "2 cookies", "1 cookie"], c: "3 cookies" },
-            { q: "LIST 2: You buy 2 Carrots (Orange) at 1 cookie each. What is the total?", h: "Pista: Carrots cost 1 cookie each", a: ["2 cookies", "3 cookies", "4 cookies"], c: "2 cookies" },
-            { q: "LIST 2: TRICKY ITEM: 1 Chocolate Cookie Card - Is a cookie a fruit or a vegetable?", h: "Pista: Do NOT buy this!", a: ["Do NOT buy this!", "Fruit", "Vegetable"], c: "Do NOT buy this!" },
-            { q: "LIST 2: What is the TOTAL COST for List 2?", h: "Pista: Budget is 10 Cookies maximum", a: ["7 Cookies", "8 Cookies", "9 Cookies"], c: "7 Cookies" }
+            { q: "How many cookies does 1 Coconut (Brown / White) cost?", h: "Hint: Check Flashcard", a: ["3 cookies", "2 cookies", "1 cookie"], c: "3 cookies" },
+            { q: "You buy 2 Carrots (Orange). What is the total?", h: "Hint: Check Flashcard", a: ["2 cookies", "3 cookies", "4 cookies"], c: "2 cookies" },
+            { q: "TRICKY ITEM: 1 Chocolate Cookie Card - Is a cookie a fruit or a vegetable?", h: "Hint: Do NOT buy this!", a: ["Do NOT buy this!", "Fruit", "Vegetable"], c: "Do NOT buy this!" },
+            { q: "What is the TOTAL COST ?", h: "Hint: Budget is 10 Cookies maximum", a: ["7 Cookies", "8 Cookies", "9 Cookies"], c: "7 Cookies" }
+        ],
+        [
+            { q: "You buy 1 Banana and 2 Apples (Red). How much do they cost in total?", h: "Hint: Check Flashcard", a: ["3 cookies", "2 cookies", "4 cookies"], c: "3 cookies" },
+            { q: "What is the colour of a standard Banana on the stand?", h: "Hint: Check the flashcard color for bananas", a: ["Yellow", "Red", "Green"], c: "Yellow" },
+            { q: "You buy 3 Potatoes (Brown/Yellow). How many cookies do they cost ?", h: "Hint: Basic multiplication", a: ["3 cookies", "2 cookies", "5 cookies"], c: "3 cookies" },
+            { q: "How many colours of Apples are shown on the stand flashcard?", h: "Hint: Check Flashcards", a: ["Three colors", "One color", "Two colors"], c: "Three colors" }
+        ],
+        [
+            { q: "When the cashier says 'Here you go!', what is the proper polite response?", h: "Hint: Basic shopping manners", a: ["Thank you!", "Hello!", "Good morning!"], c: "Thank you!" },
+            { q: "You want to ask the price of a Carrot. What do you say?", h: "Hint: Basic shopping manners", a: ["How much is the carrot?", "Where is the carrot?", "Do you like carrots?"], c: "How much is the carrot?" },
+            { q: "Is a Coconut classified as a Fruit or a Vegetable in your list?", h: "Hint: Check Flashcard", a: ["Fruit", "Vegetable", "Dairy"], c: "Fruit" },
+            { q: "You buy 2 Lettuces. What is the total?", h: "Hint: Check Flashcard", a: ["4 cookies", "2 cookies", "3 cookies"], c: "4 cookies" }
         ]
     ],
     medium: [
+        // 2ª Opción CORRECTA en Intermedio
         [
-            { q: "INTERMEDIATE: You buy 1 Papaya (2 cookies), 1 Artichoke (2 cookies), and 2 Guavas (2 cookies each). What is the subtotal?", h: "Pista: Intermediate Level List 3", a: ["8 cookies", "6 cookies", "10 cookies"], c: "8 cookies" },
-            { q: "INTERMEDIATE: TRICKY ITEM: What is Kohlrabi?", h: "Pista: Is this strange item a fruit or a cabbage relative?", a: ["Cabbage relative", "Fruit", "Underground nut"], c: "Cabbage relative" },
-            { q: "INTERMEDIATE: You buy 2 Rambutans (2 cookies each) and 1 Okra (1 cookie). How many cookies do you spend?", h: "Pista: Intermediate Level List 4", a: ["5 cookies", "4 cookies", "3 cookies"], c: "5 cookies" },
-            { q: "INTERMEDIATE: What is the total cost of List 3?", h: "Pista: Reaches the maximum budget limit!", a: ["10 Cookies", "9 Cookies", "8 Cookies"], c: "10 Cookies" }
+            { q: "You buy 1 Papaya, 1 Artichoke, and 2 Guavas. What is the subtotal?", h: "Hint: Check Flashcards", a: ["6 cookies", "8 cookies", "10 cookies"], c: "8 cookies" },
+            { q: "TRICKY ITEM: What is Kohlrabi?", h: "Hint: Is this strange item a fruit or a cabbage relative?", a: ["Fruit", "Cabbage relative", "Underground nut"], c: "Cabbage relative" },
+            { q: "You buy 2 Rambutans and 1 Okra. How many cookies do you spend?", h: "Hint: Check Flashcards", a: ["4 cookies", "5 cookies", "3 cookies"], c: "5 cookies" },
+            { q: "What is the total cost of all the items?", h: "Hint: Reaches the maximum budget limit!", a: ["9 Cookies", "10 Cookies", "8 Cookies"], c: "10 Cookies" }
+        ],
+        [
+            { q: "You buy 1 Artichoke and 2 Cabbages. What is the total?", h: "Hint: Check Flashcard", a: ["6 cookies", "5 cookies", "7 cookies"], c: "6 cookies" },
+            { q: "What colour is the Kohlrabi listed in the flashcards?", h: "Hint: Check the vegetable attributes table", a: ["Bright orange", "Light green / Purple", "Deep blue"], c: "Light green / Purple" },
+            { q: "You buy 1 Papaya and 3 Potatoes. What is your subtotal?", h: "Hint: Check Flashcard", a: ["4 cookies", "5 cookies", "6 cookies"], c: "5 cookies" },
+            { q: "Complete the cashier dialogue: 'It costs ___ cookie(s).'", h: "Hint: Fill in the blank ", a: ["many", "___", "some"], c: "___" }
+        ],
+        [
+            { q: "Which of these items is strictly a Vegetable on your list?", h: "Hint: Look at the carrot, papaya, or banana", a: ["Papaya", "Carrot", "Banana"], c: "Carrot" },
+            { q: "You have a budget of 10 cookies. You spend 8 cookies. How many cookies do you have left?", h: "Hint: Basic Subtraction", a: ["1 cookie", "2 cookies", "3 cookies"], c: "2 cookies" },
+            { q: "What is the Spanish translation for 'Artichoke'?", h: "Hint: Look up in a dictionary", a: ["Nabo", "Alcaucil", "Lechuga"], c: "Alcaucil" },
+            { q: "You buy 2 Guavas and 1 Okra. Does this fit your 10 cookie budget?", h: "Hint: Check Flashcards", a: ["No, it is too expensive", "Yes, it is under budget", "Exact maximum limit"], c: "Yes, it is under budget" }
         ]
     ],
     hard: [
+        // 3ª Opción CORRECTA en Avanzado
         [
-            { q: "ADVANCED: Which item matches this description: '1 Tropical Star-Shaped Fruit' (2 cookies)?", h: "Pista: Advanced Level List 5", a: ["Starfruit", "Dragon Fruit", "Passion Fruit"], c: "Starfruit" },
-            { q: "ADVANCED: TRICKY ITEM: Bitter Melon has 'melon' in the name... is it a sweet fruit or a bitter vegetable?", h: "Pista: Advanced Level List 5", a: ["Bitter vegetable", "Sweet fruit", "Dairy item"], c: "Bitter vegetable" },
-            { q: "ADVANCED: Find a 'Fruit disguised as a Veggie' on the stand for List 6.", h: "Pista: List 6 hints: Tomato, Okra, or Bitter Melon!", a: ["Okra", "Cabbage", "Celery"], c: "Okra" },
-            { q: "ADVANCED: What is the total cost of List 6 (Dragon Fruit, Passion Fruit, Leafy Green, Disguised Fruit)?", h: "Pista: 3 + 2 + 2 + 2 cookies", a: ["9 Cookies", "10 Cookies", "8 Cookies"], c: "9 Cookies" }
+            { q: "Which item matches this description: '1 Tropical Star-Shaped Fruit' ?", h: "Hint: Check Flashcards", a: ["Dragon Fruit", "Passion Fruit", "Starfruit"], c: "Starfruit" },
+            { q: "TRICKY ITEM: Bitter Melon has 'melon' in the name... is it a sweet fruit or a bitter vegetable?", h: "Hint: Check Flashcard", a: ["Sweet fruit", "Dairy item", "Bitter vegetable"], c: "Bitter vegetable" },
+            { q: "Find a 'Fruit disguised as a Veggie'.", h: "Hint: Tomato, Okra, or Bitter Melon!", a: ["Cabbage", "Celery", "Okra"], c: "Okra" },
+            { q: "What is the total cost of List (Dragon Fruit, Passion Fruit, Leafy Green, Disguised Fruit)?", h: "Hint: Check Flashcards", a: ["10 Cookies", "8 Cookies", "9 Cookies"], c: "9 Cookies" }
+        ],
+        [
+            { q: "What colours are available for the Passion Fruit in the flashcards?", h: "Hint: Check the dual-color entry for Maracuyá", a: ["Red / Green", "Pink / White", "Purple / Yellow"], c: "Purple / Yellow" },
+            { q: "Which fruit has a hairy or spiky red skin texture with a white inside?", h: "Hint: Tropical fruit", a: ["Starfruit", "Papaya", "Rambutan"], c: "Rambutan" },
+            { q: "TRICKY MATH: You buy 1 Dragon Fruit, 1 Starfruit, and 2 Guavas. Do you exceed the 10 cookie budget?", h: "Hint: Check Flashcards", a: ["Yes, 11 cookies total", "Exact 10 cookies limit", "No, 9 cookies total (Safe!)"], c: "No, 9 cookies total (Safe!)" },
+            { q: "What is the Spanish name for 'Bitter melon'?", h: "Hint: look up in a dictionary", a: ["Fruta de la pasión", "Alcaucil", "Melón amargo chino"], c: "Melón amargo chino" }
+        ],
+        [
+            { q: "Which vegetable features multiple colour varieties including purple, blue, pink, and red in your flashcard image?", h: "Hint: The versatile underground crop", a: ["Lettuce", "Kohlrabi", "Potato"], c: "Potato" },
+            { q: "When interacting with the cashier, how do you ask about the price in English?", h: "Hint: Basic shopping manners", a: ["How many cookies you have?", "Is this a fruit?", "How much is the...?"], c: "How much is the...?" },
+            { q: "Dragon Fruit skin colour options in the flashcard are...", h: "Hint: Check Flashcard", a: ["Yellow / Blue", "Brown / Green", "Pink / White"], c: "Pink / White" },
+            { q: "If you combine 1 Kohlrabi, 1 Artichoke, and 1 Bitter Melon, how many total items are you purchasing?", h: "Hint: Basic Addition", a: ["4 items", "2 items", "3 items"], c: "3 items" }
         ]
     ]
 };
@@ -323,13 +362,15 @@ function startQuiz(difficulty) {
     if(difficulty === 'easy') {
         let randomListIndex = Math.floor(Math.random() * bank.easy.length);
         currentQuestions = bank.easy[randomListIndex];
-        titleText = "INITIAL LEVEL (List " + (randomListIndex + 1) + ")";
+        titleText = "INITIAL LEVEL ";
     } else if(difficulty === 'medium') {
-        currentQuestions = bank.medium[0];
-        titleText = "INTERMEDIATE LEVEL";
+        let randomListIndex = Math.floor(Math.random() * bank.medium.length);
+        currentQuestions = bank.medium[randomListIndex];
+        titleText = "INTERMEDIATE LEVEL ";
     } else if(difficulty === 'hard') {
-        currentQuestions = bank.hard[0];
-        titleText = "ADVANCED LEVEL";
+        let randomListIndex = Math.floor(Math.random() * bank.hard.length);
+        currentQuestions = bank.hard[randomListIndex];
+        titleText = "ADVANCED LEVEL ";
     }
    
     document.getElementById('difficulty-title').innerText = titleText;
